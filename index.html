@@ -184,6 +184,20 @@
                 }
             }
             
+            // Manual CSS override function
+            function forceScreenVisibility() {
+                const allScreens = document.querySelectorAll('.screen');
+                allScreens.forEach(screen => {
+                    if (screen.classList.contains('active')) {
+                        screen.style.display = 'block';
+                        console.log(`🔧 Forced ${screen.id} to be visible`);
+                    } else {
+                        screen.style.display = 'none';
+                        console.log(`🔧 Forced ${screen.id} to be hidden`);
+                    }
+                });
+            }
+            
             // Check if key functions exist
             if (typeof showScreen === 'function') {
                 console.log('✅ showScreen function available');
@@ -217,7 +231,10 @@
                     console.log('About to call showScreen...');
                     if (typeof showScreen === 'function') {
                         showScreen('character-select');
-                        setTimeout(showActiveScreen, 100);
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
                     } else {
                         console.error('showScreen function not available');
                     }
@@ -230,7 +247,10 @@
                     console.log('Character select button clicked!');
                     if (typeof showScreen === 'function') {
                         showScreen('character-select');
-                        setTimeout(showActiveScreen, 100);
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
                     }
                 });
             }
@@ -241,7 +261,10 @@
                     console.log('Rules button clicked!');
                     if (typeof showScreen === 'function') {
                         showScreen('rules-screen');
-                        setTimeout(showActiveScreen, 100);
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
                     }
                 });
             }
@@ -274,7 +297,10 @@
             if (typeof showScreen === 'function') {
                 console.log('🔄 Forcing main menu to be visible...');
                 showScreen('main-menu');
-                setTimeout(showActiveScreen, 100);
+                setTimeout(() => {
+                    forceScreenVisibility();
+                    showActiveScreen();
+                }, 100);
             }
             
             // Hide loading after a delay
