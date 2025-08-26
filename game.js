@@ -221,12 +221,26 @@ function toggleCharacterSelection(character) {
     
     renderCharacterSelection();
     
-    // Update start button
+    // Update main menu start button
     const startBtn = document.getElementById('start-game-btn');
-    if (gameState.selectedCharacters.length >= 2) {
-        startBtn.textContent = `Start Game (${gameState.selectedCharacters.length} players)`;
-    } else {
-        startBtn.textContent = 'Start New Game';
+    if (startBtn) {
+        if (gameState.selectedCharacters.length >= 2) {
+            startBtn.textContent = `Start Game (${gameState.selectedCharacters.length} players)`;
+        } else {
+            startBtn.textContent = 'Start New Game';
+        }
+    }
+    
+    // Update character selection screen start button
+    const startGameFromCharacterBtn = document.getElementById('start-game-from-character-btn');
+    if (startGameFromCharacterBtn) {
+        if (gameState.selectedCharacters.length >= 2) {
+            startGameFromCharacterBtn.textContent = `Start Game (${gameState.selectedCharacters.length} players)`;
+            startGameFromCharacterBtn.disabled = false;
+        } else {
+            startGameFromCharacterBtn.textContent = 'Start Game (Select at least 2 players)';
+            startGameFromCharacterBtn.disabled = true;
+        }
     }
 }
 

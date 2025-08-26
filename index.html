@@ -26,11 +26,14 @@
         <!-- Character Selection Screen -->
         <div id="character-select" class="screen">
             <div class="screen-header">
-                <button class="back-btn" onclick="showScreen('main-menu')">← Back</button>
+                <button id="back-from-character-btn" class="back-btn">← Back</button>
                 <h2>Choose Your Character</h2>
             </div>
             <div class="characters-grid" id="characters-grid">
                 <!-- Characters will be populated by JavaScript -->
+            </div>
+            <div class="character-selection-controls">
+                <button id="start-game-from-character-btn" class="menu-btn primary" disabled>Start Game (Select at least 2 players)</button>
             </div>
         </div>
 
@@ -72,7 +75,7 @@
         <!-- Rules Screen -->
         <div id="rules-screen" class="screen">
             <div class="screen-header">
-                <button class="back-btn" onclick="showScreen('main-menu')">← Back</button>
+                <button id="back-from-rules-btn" class="back-btn">← Back</button>
                 <h2>How to Play</h2>
             </div>
             <div class="rules-content">
@@ -277,6 +280,53 @@
             if (muteBtn && window.audioManager) {
                 console.log('✅ Mute button found');
                 muteBtn.addEventListener('click', () => window.audioManager.toggleMute());
+            }
+            
+            // Add event listeners for back buttons and character selection controls
+            const backFromCharacterBtn = document.getElementById('back-from-character-btn');
+            const backFromRulesBtn = document.getElementById('back-from-rules-btn');
+            const startGameFromCharacterBtn = document.getElementById('start-game-from-character-btn');
+            
+            if (backFromCharacterBtn) {
+                console.log('✅ Back from character button found');
+                backFromCharacterBtn.addEventListener('click', function() {
+                    console.log('Back from character button clicked!');
+                    if (typeof showScreen === 'function') {
+                        showScreen('main-menu');
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
+                    }
+                });
+            }
+            
+            if (backFromRulesBtn) {
+                console.log('✅ Back from rules button found');
+                backFromRulesBtn.addEventListener('click', function() {
+                    console.log('Back from rules button clicked!');
+                    if (typeof showScreen === 'function') {
+                        showScreen('main-menu');
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
+                    }
+                });
+            }
+            
+            if (startGameFromCharacterBtn) {
+                console.log('✅ Start game from character button found');
+                startGameFromCharacterBtn.addEventListener('click', function() {
+                    console.log('Start game from character button clicked!');
+                    if (typeof startGame === 'function') {
+                        startGame();
+                        setTimeout(() => {
+                            forceScreenVisibility();
+                            showActiveScreen();
+                        }, 100);
+                    }
+                });
             }
             
             // Initialize the game
