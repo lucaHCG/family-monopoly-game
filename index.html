@@ -169,6 +169,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded, checking game initialization...');
             
+            // Add visual debugging
+            function showActiveScreen() {
+                const activeScreen = document.querySelector('.screen.active');
+                const allScreens = document.querySelectorAll('.screen');
+                console.log('🔍 Screen Status:');
+                allScreens.forEach(screen => {
+                    const isActive = screen.classList.contains('active');
+                    const isVisible = window.getComputedStyle(screen).display !== 'none';
+                    console.log(`  ${screen.id}: active=${isActive}, visible=${isVisible}`);
+                });
+                if (activeScreen) {
+                    console.log(`🎯 Currently active: ${activeScreen.id}`);
+                }
+            }
+            
             // Check if key functions exist
             if (typeof showScreen === 'function') {
                 console.log('✅ showScreen function available');
@@ -199,8 +214,10 @@
                 console.log('✅ Start button found');
                 startBtn.addEventListener('click', function() {
                     console.log('Start button clicked!');
+                    console.log('About to call showScreen...');
                     if (typeof showScreen === 'function') {
                         showScreen('character-select');
+                        setTimeout(showActiveScreen, 100);
                     } else {
                         console.error('showScreen function not available');
                     }
@@ -213,16 +230,18 @@
                     console.log('Character select button clicked!');
                     if (typeof showScreen === 'function') {
                         showScreen('character-select');
+                        setTimeout(showActiveScreen, 100);
                     }
                 });
             }
             
             if (rulesBtn) {
-                console.log('✅ Rules button found');
+                console.log('✅ Rules button clicked!');
                 rulesBtn.addEventListener('click', function() {
                     console.log('Rules button clicked!');
                     if (typeof showScreen === 'function') {
                         showScreen('rules-screen');
+                        setTimeout(showActiveScreen, 100);
                     }
                 });
             }
@@ -248,10 +267,14 @@
                 console.log('✅ Character selection rendered');
             }
             
+            // Show initial screen status
+            showActiveScreen();
+            
             // Force show main menu
             if (typeof showScreen === 'function') {
                 console.log('🔄 Forcing main menu to be visible...');
                 showScreen('main-menu');
+                setTimeout(showActiveScreen, 100);
             }
             
             // Hide loading after a delay
