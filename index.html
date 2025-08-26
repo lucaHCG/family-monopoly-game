@@ -329,6 +329,34 @@
                 });
             }
             
+            // Add event listeners for game controls
+            const diceBtn = document.getElementById('dice-btn');
+            const endTurnBtn = document.getElementById('end-turn-btn');
+            
+            if (diceBtn) {
+                console.log('✅ Dice button found');
+                diceBtn.addEventListener('click', function() {
+                    console.log('Dice button clicked!');
+                    if (typeof rollDice === 'function') {
+                        rollDice();
+                    } else {
+                        console.error('rollDice function not available');
+                    }
+                });
+            }
+            
+            if (endTurnBtn) {
+                console.log('✅ End turn button found');
+                endTurnBtn.addEventListener('click', function() {
+                    console.log('End turn button clicked!');
+                    if (typeof endTurn === 'function') {
+                        endTurn();
+                    } else {
+                        console.error('endTurn function not available');
+                    }
+                });
+            }
+            
             // Initialize the game
             if (typeof initializeGame === 'function') {
                 initializeGame();

@@ -371,9 +371,17 @@ function updateCurrentPlayerDisplay() {
 }
 
 function rollDice() {
-    if (!gameState.gameStarted) return;
+    console.log('🎲 rollDice function called');
+    console.log('Game state:', gameState);
+    
+    if (!gameState.gameStarted) {
+        console.log('❌ Game not started');
+        return;
+    }
     
     const currentPlayer = gameState.players[gameState.currentPlayerIndex];
+    console.log('Current player:', currentPlayer);
+    
     if (currentPlayer.inJail) {
         alert(`${currentPlayer.name} is in jail!`);
         return;
@@ -382,36 +390,46 @@ function rollDice() {
     const diceBtn = document.getElementById('dice-btn');
     const endTurnBtn = document.getElementById('end-turn-btn');
     
+    console.log('Dice button:', diceBtn);
+    console.log('End turn button:', endTurnBtn);
+    
     diceBtn.disabled = true;
     endTurnBtn.disabled = false;
     
     // Animate dice
     const diceDisplay = document.getElementById('dice-display');
-    diceDisplay.classList.add('rolling');
+    console.log('Dice display:', diceDisplay);
     
-    // Play dice sound using audio manager
-    if (audioManager) {
-        audioManager.playDiceRoll();
-    }
-    
-    setTimeout(() => {
-        const roll = Math.floor(Math.random() * 6) + 1;
-        diceDisplay.textContent = `🎲 ${roll}`;
-        diceDisplay.classList.remove('rolling');
+    if (diceDisplay) {
+        diceDisplay.classList.add('rolling');
         
-        movePlayer(currentPlayer, roll);
-        addGameLog(`${currentPlayer.name} rolled a ${roll}`, 'dice');
-        
-        // Check if player can buy property
-        const currentSpace = gameState.board[currentPlayer.position];
-        if (currentSpace.type === 'property' && !currentSpace.owner) {
-            setTimeout(() => {
-                if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
-                    buyProperty(currentPlayer, currentSpace);
-                }
-            }, 500);
+        // Play dice sound using audio manager
+        if (window.audioManager) {
+            window.audioManager.playDiceRoll();
         }
-    }, 500);
+        
+        setTimeout(() => {
+            const roll = Math.floor(Math.random() * 6) + 1;
+            console.log('🎲 Rolled:', roll);
+            diceDisplay.textContent = `🎲 ${roll}`;
+            diceDisplay.classList.remove('rolling');
+            
+            movePlayer(currentPlayer, roll);
+            addGameLog(`${currentPlayer.name} rolled a ${roll}`, 'dice');
+            
+            // Check if player can buy property
+            const currentSpace = gameState.board[currentPlayer.position];
+            if (currentSpace.type === 'property' && !currentSpace.owner) {
+                setTimeout(() => {
+                    if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
+                        buyProperty(currentPlayer, currentSpace);
+                    }
+                }, 500);
+            }
+        }, 500);
+    } else {
+        console.error('❌ Dice display element not found');
+    }
 }
 
 function movePlayer(player, spaces) {
