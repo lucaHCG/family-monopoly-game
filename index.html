@@ -248,6 +248,12 @@
                 console.log('✅ Character selection rendered');
             }
             
+            // Force show main menu
+            if (typeof showScreen === 'function') {
+                console.log('🔄 Forcing main menu to be visible...');
+                showScreen('main-menu');
+            }
+            
             // Hide loading after a delay
             setTimeout(() => {
                 const loading = document.getElementById('loading');

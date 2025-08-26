@@ -147,13 +147,22 @@ function setupEventListeners() {
 }
 
 function showScreen(screenId) {
+    console.log(`🔄 showScreen called with: ${screenId}`);
+    
     // Hide all screens
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
+        console.log(`❌ Removed active from: ${screen.id}`);
     });
     
     // Show target screen
-    document.getElementById(screenId).classList.add('active');
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        console.log(`✅ Added active to: ${screenId}`);
+    } else {
+        console.error(`❌ Target screen not found: ${screenId}`);
+    }
     
     // Update button text based on character selection
     if (screenId === 'main-menu') {
@@ -164,6 +173,10 @@ function showScreen(screenId) {
             startBtn.textContent = 'Start New Game';
         }
     }
+    
+    // Debug: show current active screen
+    const activeScreen = document.querySelector('.screen.active');
+    console.log(`🎯 Current active screen: ${activeScreen ? activeScreen.id : 'none'}`);
 }
 
 function renderCharacterSelection() {
