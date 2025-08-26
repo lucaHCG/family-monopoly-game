@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Monopoly Go! 🏠</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen active">
+            <div class="menu-content">
+                <h1 class="game-title">🏠 Family Monopoly Go!</h1>
+                <div class="menu-buttons">
+                    <button id="start-game-btn" class="menu-btn primary">Start New Game</button>
+                    <button id="character-select-btn" class="menu-btn secondary">Character Select</button>
+                    <button id="rules-btn" class="menu-btn secondary">How to Play</button>
+                    <button id="music-toggle-btn" class="menu-btn secondary">🎵 Toggle Music</button>
+                    <button id="mute-btn" class="menu-btn secondary">🔇 Toggle Mute</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character Selection Screen -->
+        <div id="character-select" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Back</button>
+                <h2>Choose Your Character</h2>
+            </div>
+            <div class="characters-grid" id="characters-grid">
+                <!-- Characters will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="player-info">
+                    <div class="current-player">
+                        <div class="player-avatar" id="current-player-avatar"></div>
+                        <div class="player-details">
+                            <span class="player-name" id="current-player-name">Player</span>
+                            <span class="player-money" id="current-player-money">$1500</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="dice-btn" class="dice-btn">🎲 Roll Dice</button>
+                    <button id="end-turn-btn" class="end-turn-btn" disabled>End Turn</button>
+                </div>
+            </div>
+
+            <div class="game-board">
+                <div class="board-grid" id="board-grid">
+                    <!-- Board spaces will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="game-sidebar">
+                <div class="dice-display">
+                    <div class="dice" id="dice-display">🎲</div>
+                </div>
+                <div class="game-log" id="game-log">
+                    <h3>Game Log</h3>
+                    <div class="log-entries" id="log-entries"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules Screen -->
+        <div id="rules-screen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Back</button>
+                <h2>How to Play</h2>
+            </div>
+            <div class="rules-content">
+                <h3>🎯 Objective</h3>
+                <p>Be the last player with money! Travel around the board, buy properties, and collect rent from other players.</p>
+                
+                <h3>🎲 Gameplay</h3>
+                <ul>
+                    <li>Roll the dice to move around the board</li>
+                    <li>Buy properties when you land on them</li>
+                    <li>Pay rent when you land on someone else's property</li>
+                    <li>Collect money when you pass GO</li>
+                    <li>Special spaces have different effects</li>
+                </ul>
+
+                <h3>💰 Money</h3>
+                <ul>
+                    <li>Start with $1500</li>
+                    <li>Pass GO: Collect $200</li>
+                    <li>Buy properties to invest</li>
+                    <li>Pay rent to stay on properties</li>
+                </ul>
+
+                <h3>🏠 Properties</h3>
+                <ul>
+                    <li>Each property has a purchase price</li>
+                    <li>Rent increases with more properties of the same color</li>
+                    <li>Build houses to increase rent</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen">
+            <div class="game-over-content">
+                <h2>🎉 Game Over!</h2>
+                <div id="winner-display"></div>
+                <div class="final-scores" id="final-scores"></div>
+                <button id="play-again-btn" class="menu-btn primary">Play Again</button>
+                <button id="main-menu-btn" class="menu-btn secondary">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <!-- <audio id="background-music" loop>
+        <source src="assets/background-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="dice-sound">
+        <source src="assets/dice-roll.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="money-sound">
+        <source src="assets/money.mp3" type="audio/mpeg">
+    </audio> -->
+
+    <!-- Loading indicator -->
+    <div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div style="color: white; text-align: center;">
+            <h2>Loading Family Monopoly Go!...</h2>
+            <p>Please wait while the game initializes...</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple error handling and loading management
+        window.addEventListener('error', function(e) {
+            console.error('Game error:', e.error);
+            document.getElementById('loading').innerHTML = `
+                <div style="color: white; text-align: center;">
+                    <h2>Error Loading Game</h2>
+                    <p>There was an error: ${e.error.message}</p>
+                    <button onclick="location.reload()">Reload Page</button>
+                </div>
+            `;
+        });
+
+        // Hide loading when everything is ready
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) {
+                    loading.style.display = 'none';
+                }
+            }, 1000);
+        });
+    </script>
+
+    <!-- Load scripts in order -->
+    <script src="audio-manager.js"></script>
+    <script src="game.js"></script>
+    
+    <script>
+        // Final initialization check
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking game initialization...');
+            
+            // Check if key functions exist
+            if (typeof showScreen === 'function') {
+                console.log('✅ showScreen function available');
+            } else {
+                console.error('❌ showScreen function not available');
+            }
+            
+            if (typeof startGame === 'function') {
+                console.log('✅ startGame function available');
+            } else {
+                console.error('❌ startGame function not available');
+            }
+            
+            // Initialize audio manager
+            if (typeof AudioManager !== 'undefined') {
+                window.audioManager = new AudioManager();
+                console.log('✅ Audio manager initialized');
+            }
+            
+            // Set up all event listeners here to avoid conflicts
+            const startBtn = document.getElementById('start-game-btn');
+            const characterSelectBtn = document.getElementById('character-select-btn');
+            const rulesBtn = document.getElementById('rules-btn');
+            const musicToggleBtn = document.getElementById('music-toggle-btn');
+            const muteBtn = document.getElementById('mute-btn');
+            
+            if (startBtn) {
+                console.log('✅ Start button found');
+                startBtn.addEventListener('click', function() {
+                    console.log('Start button clicked!');
+                    if (typeof showScreen === 'function') {
+                        showScreen('character-select');
+                    } else {
+                        console.error('showScreen function not available');
+                    }
+                });
+            }
+            
+            if (characterSelectBtn) {
+                console.log('✅ Character select button found');
+                characterSelectBtn.addEventListener('click', function() {
+                    console.log('Character select button clicked!');
+                    if (typeof showScreen === 'function') {
+                        showScreen('character-select');
+                    }
+                });
+            }
+            
+            if (rulesBtn) {
+                console.log('✅ Rules button found');
+                rulesBtn.addEventListener('click', function() {
+                    console.log('Rules button clicked!');
+                    if (typeof showScreen === 'function') {
+                        showScreen('rules-screen');
+                    }
+                });
+            }
+            
+            if (musicToggleBtn && window.audioManager) {
+                console.log('✅ Music toggle button found');
+                musicToggleBtn.addEventListener('click', () => window.audioManager.toggleBackgroundMusic());
+            }
+            
+            if (muteBtn && window.audioManager) {
+                console.log('✅ Mute button found');
+                muteBtn.addEventListener('click', () => window.audioManager.toggleMute());
+            }
+            
+            // Initialize the game
+            if (typeof initializeGame === 'function') {
+                initializeGame();
+                console.log('✅ Game initialized');
+            }
+            
+            if (typeof renderCharacterSelection === 'function') {
+                renderCharacterSelection();
+                console.log('✅ Character selection rendered');
+            }
+            
+            // Hide loading after a delay
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) {
+                    loading.style.display = 'none';
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

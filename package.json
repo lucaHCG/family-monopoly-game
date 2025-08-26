@@ -1,0 +1,36 @@
+{
+  "name": "family-monopoly-go",
+  "version": "1.0.0",
+  "description": "A custom mini game similar to Monopoly Go! featuring family members and friends",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html",
+    "test": "open test.html",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "monopoly",
+    "family",
+    "game",
+    "board-game",
+    "multiplayer",
+    "web-game"
+  ],
+  "author": "Family Game Creator",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "local"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
+

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Family Monopoly Go!</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug-info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        button { padding: 10px 20px; margin: 5px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Mode - Family Monopoly Go!</h1>
+    
+    <div class="debug-info">
+        <h3>Testing Game Components:</h3>
+        <div id="test-results"></div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Game State:</h3>
+        <div id="game-state"></div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Actions:</h3>
+        <button onclick="testCharacterSelection()">Test Character Selection</button>
+        <button onclick="testGameStart()">Test Game Start</button>
+        <button onclick="showGameScreen()">Show Game Screen</button>
+        <button onclick="resetGame()">Reset Game</button>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Console Output:</h3>
+        <div id="console-output" style="background: #000; color: #0f0; padding: 10px; font-family: monospace; height: 200px; overflow-y: scroll;"></div>
+    </div>
+    
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function logToScreen(message, type = 'log') {
+            const consoleOutput = document.getElementById('console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.style.color = type === 'error' ? '#ff6b6b' : '#0f0';
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            consoleOutput.appendChild(logEntry);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            logToScreen(args.join(' '), 'log');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            logToScreen(args.join(' '), 'error');
+        };
+        
+        // Test basic functionality
+        function testBasicFunctionality() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '';
+            
+            try {
+                // Test DOM
+                const testDiv = document.createElement('div');
+                testDiv.innerHTML = 'DOM Test';
+                document.body.appendChild(testDiv);
+                document.body.removeChild(testDiv);
+                addResult('✅ DOM manipulation working', 'success');
+                
+                // Test JSON
+                const testObj = { test: 'data' };
+                JSON.stringify(testObj);
+                addResult('✅ JSON handling working', 'success');
+                
+                // Test arrays
+                const testArray = [1, 2, 3];
+                testArray.forEach(item => item * 2);
+                addResult('✅ Array methods working', 'success');
+                
+            } catch (error) {
+                addResult(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        function addResult(message, type) {
+            const results = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = type;
+            resultDiv.textContent = message;
+            results.appendChild(resultDiv);
+        }
+        
+        function testCharacterSelection() {
+            console.log('Testing character selection...');
+            
+            // Test if CHARACTERS array exists
+            if (typeof CHARACTERS !== 'undefined') {
+                console.log('CHARACTERS array found:', CHARACTERS.length, 'characters');
+                addResult(`✅ Found ${CHARACTERS.length} characters`, 'success');
+            } else {
+                console.log('CHARACTERS array not found');
+                addResult('❌ CHARACTERS array not found', 'error');
+            }
+            
+            // Test if gameState exists
+            if (typeof gameState !== 'undefined') {
+                console.log('Game state found:', gameState);
+                addResult('✅ Game state found', 'success');
+            } else {
+                console.log('Game state not found');
+                addResult('❌ Game state not found', 'error');
+            }
+        }
+        
+        function testGameStart() {
+            console.log('Testing game start...');
+            
+            try {
+                if (typeof startGame === 'function') {
+                    console.log('startGame function found');
+                    addResult('✅ startGame function found', 'success');
+                    
+                    // Check if we have selected characters
+                    if (gameState && gameState.selectedCharacters && gameState.selectedCharacters.length >= 2) {
+                        console.log('Ready to start game with', gameState.selectedCharacters.length, 'players');
+                        addResult(`✅ Ready to start with ${gameState.selectedCharacters.length} players`, 'success');
+                    } else {
+                        console.log('No characters selected, need at least 2');
+                        addResult('❌ Need at least 2 characters selected', 'error');
+                    }
+                } else {
+                    console.log('startGame function not found');
+                    addResult('❌ startGame function not found', 'error');
+                }
+            } catch (error) {
+                console.error('Error testing game start:', error);
+                addResult(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        function showGameScreen() {
+            console.log('Attempting to show game screen...');
+            
+            try {
+                if (typeof showScreen === 'function') {
+                    showScreen('game-screen');
+                    addResult('✅ showScreen function called', 'success');
+                } else {
+                    console.log('showScreen function not found');
+                    addResult('❌ showScreen function not found', 'error');
+                }
+            } catch (error) {
+                console.error('Error showing game screen:', error);
+                addResult(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        function resetGame() {
+            console.log('Resetting game...');
+            
+            try {
+                if (typeof resetGame === 'function') {
+                    resetGame();
+                    addResult('✅ Game reset', 'success');
+                } else {
+                    console.log('resetGame function not found');
+                    addResult('❌ resetGame function not found', 'error');
+                }
+            } catch (error) {
+                console.error('Error resetting game:', error);
+                addResult(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Initialize debug mode
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug mode initialized');
+            testBasicFunctionality();
+            
+            // Try to load the game scripts
+            console.log('Attempting to load game scripts...');
+            
+            // Load audio manager
+            const audioScript = document.createElement('script');
+            audioScript.src = 'audio-manager.js';
+            audioScript.onload = function() {
+                console.log('✅ Audio manager loaded');
+                addResult('✅ Audio manager loaded', 'success');
+            };
+            audioScript.onerror = function() {
+                console.error('❌ Failed to load audio manager');
+                addResult('❌ Failed to load audio manager', 'error');
+            };
+            document.head.appendChild(audioScript);
+            
+            // Load game script
+            const gameScript = document.createElement('script');
+            gameScript.src = 'game.js';
+            gameScript.onload = function() {
+                console.log('✅ Game script loaded');
+                addResult('✅ Game script loaded', 'success');
+                
+                // Wait a bit then test character selection
+                setTimeout(() => {
+                    testCharacterSelection();
+                }, 500);
+            };
+            gameScript.onerror = function() {
+                console.error('❌ Failed to load game script');
+                addResult('❌ Failed to load game script', 'error');
+            };
+            document.head.appendChild(gameScript);
+        });
+        
+        // Update game state display
+        function updateGameStateDisplay() {
+            const gameStateDiv = document.getElementById('game-state');
+            if (typeof gameState !== 'undefined') {
+                gameStateDiv.innerHTML = `
+                    <strong>Game Started:</strong> ${gameState.gameStarted}<br>
+                    <strong>Players:</strong> ${gameState.players.length}<br>
+                    <strong>Selected Characters:</strong> ${gameState.selectedCharacters.length}<br>
+                    <strong>Current Player:</strong> ${gameState.currentPlayerIndex}<br>
+                    <strong>Board:</strong> ${gameState.board.length} spaces
+                `;
+            } else {
+                gameStateDiv.innerHTML = '<em>Game state not available</em>';
+            }
+        }
+        
+        // Update display every second
+        setInterval(updateGameStateDisplay, 1000);
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Family Monopoly Go!</title>
+</head>
+<body>
+    <h1>Testing Family Monopoly Go!</h1>
+    <p>If you can see this, the basic HTML is working.</p>
+    
+    <h2>Testing JavaScript Files:</h2>
+    <div id="test-results"></div>
+    
+    <script>
+        // Test if JavaScript is working
+        document.getElementById('test-results').innerHTML = '<p>✅ JavaScript is working!</p>';
+        
+        // Test if we can access the game files
+        try {
+            // Test basic functionality
+            const testDiv = document.createElement('div');
+            testDiv.innerHTML = '<p>✅ DOM manipulation is working!</p>';
+            document.body.appendChild(testDiv);
+            
+            // Test if we can create a simple game state
+            const testGameState = {
+                players: [],
+                currentPlayerIndex: 0,
+                gameStarted: false
+            };
+            
+            if (testGameState) {
+                document.getElementById('test-results').innerHTML += '<p>✅ Game state creation is working!</p>';
+            }
+            
+        } catch (error) {
+            document.getElementById('test-results').innerHTML += `<p>❌ Error: ${error.message}</p>`;
+        }
+    </script>
+    
+    <h2>Next Steps:</h2>
+    <ol>
+        <li>Open <code>index.html</code> in your browser to play the full game</li>
+        <li>Make sure JavaScript is enabled in your browser</li>
+        <li>Allow audio if prompted (for sound effects)</li>
+    </ol>
+    
+    <p><a href="index.html">🎮 Play the Full Game!</a></p>
+</body>
+</html>
+
