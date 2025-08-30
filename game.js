@@ -388,8 +388,26 @@ function updateCurrentPlayerDisplay() {
     const name = document.getElementById('current-player-name');
     const money = document.getElementById('current-player-money');
     
-    avatar.style.backgroundColor = currentPlayer.color;
-    avatar.textContent = currentPlayer.emoji;
+    console.log('🔄 Updating current player display...');
+    console.log('Current player:', currentPlayer);
+    
+    // Find the character data for the current player
+    const character = CHARACTERS.find(c => c.id === currentPlayer.id);
+    console.log('Found character:', character);
+    
+    if (character && character.image) {
+        // Use character image
+        console.log('✅ Using character image:', character.image);
+        avatar.innerHTML = `<img src="${character.image}" alt="${currentPlayer.name}" class="current-player-image">`;
+        avatar.style.backgroundColor = 'transparent'; // Remove background color
+    } else {
+        // Fallback to emoji and color
+        console.log('❌ Using fallback emoji and color');
+        avatar.style.backgroundColor = currentPlayer.color;
+        avatar.textContent = currentPlayer.emoji;
+        avatar.innerHTML = currentPlayer.emoji; // Clear any previous content
+    }
+    
     name.textContent = currentPlayer.name;
     money.textContent = `$${currentPlayer.money}`;
 }
