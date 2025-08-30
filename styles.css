@@ -132,6 +132,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -143,30 +144,70 @@ body {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    border: 3px solid transparent;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .character-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-color: #667eea;
 }
 
 .character-card.selected {
-    border: 3px solid #667eea;
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    border-color: #27ae60;
+    background: rgba(39, 174, 96, 0.1);
+    transform: scale(1.05);
 }
 
 .character-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
     margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover .character-avatar {
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+.character-card.selected .character-avatar {
+    border-color: #27ae60;
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+}
+
+.character-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.character-emoji-fallback {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 3rem;
     color: white;
-    font-weight: bold;
+}
+
+.character-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.character-role {
+    font-size: 1rem;
+    color: #7f8c8d;
+    font-style: italic;
 }
 
 .character-name {
@@ -367,19 +408,27 @@ body {
     font-weight: 700;
 }
 
+/* Player Tokens */
 .player-token {
-    position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     font-weight: bold;
+    color: white;
+    font-size: 0.8rem;
+    margin: 2px;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player-token-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 /* Game Sidebar */

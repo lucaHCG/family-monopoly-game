@@ -2,21 +2,30 @@
 
 // Character Data
 const CHARACTERS = [
-    { id: 'luca', name: 'Luca', role: 'Father', color: '#000080', emoji: '👨‍👦' },
-    { id: 'sylwia', name: 'Sylwia', role: 'Mother', color: '#FFA500', emoji: '👩‍👧' },
-    { id: 'oli', name: 'Oli', role: 'Son', color: '#FF0000', emoji: '👦' },
-    { id: 'vicky', name: 'Vicky', role: 'Daughter', color: '#FFC0CB', emoji: '👧' },
-    { id: 'ciocia-kasia', name: 'Ciocia Kasia', role: 'Aunt', color: '#FFFF00', emoji: '👩‍🦰' },
-    { id: 'wujek-bartek', name: 'Wujek Bartek', role: 'Uncle', color: '#008000', emoji: '👨‍🦱' },
-    { id: 'zio-diego', name: 'Zio Diego', role: 'Uncle', color: '#1560BD', emoji: '👨‍🦳' },
-    { id: 'nonna-patrizia', name: 'Nonna Patrizia', role: 'Grandma', color: '#FF00FF', emoji: '👵' },
-    { id: 'nonno-mauro', name: 'Nonno Mauro', role: 'Grandpa', color: '#87CEEB', emoji: '👴' },
-    { id: 'dziadek-tosiek', name: 'Dziadek Tosiek', role: 'Grandpa', color: '#800020', emoji: '👴' },
-    { id: 'babcia-urszula', name: 'Babcia Urszula', role: 'Grandma', color: '#50C878', emoji: '👵' },
-    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦' },
-    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧' },
-    { id: 'pani-ania', name: 'Pani Ania', role: 'Oli\'s Teacher', color: '#000000', emoji: '👩‍🏫' },
-    { id: 'pani-isza', name: 'Pani Isza', role: 'Vicky\'s Teacher', color: '#F4A460', emoji: '👩‍🏫' }
+    // Playable Characters
+    { id: 'luca', name: 'Luca', role: 'Father', color: '#000080', emoji: '👨‍👦', type: 'playable', image: 'assets/characters/luca.png' },
+    { id: 'sylwia', name: 'Sylwia', role: 'Mother', color: '#FFA500', emoji: '👩‍👧', type: 'playable', image: 'assets/characters/sylwia.png' },
+    { id: 'oli', name: 'Oli', role: 'Son', color: '#FF0000', emoji: '👦', type: 'playable', image: 'assets/characters/oli.png' },
+    { id: 'vicky', name: 'Vicky', role: 'Daughter', color: '#FFC0CB', emoji: '👧', type: 'playable', image: 'assets/characters/vicky.png' },
+    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable', image: 'assets/characters/leon.png' },
+    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable', image: 'assets/characters/nela.png' },
+    { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable', image: 'assets/characters/micky.png' },
+    { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable', image: 'assets/characters/jasiu.png' },
+    
+    // NPCs (Non-Playable Characters)
+    { id: 'ciocia-kasia', name: 'Ciocia Kasia', role: 'Aunt', color: '#FFFF00', emoji: '👩‍🦰', type: 'npc', image: 'assets/characters/ciocia-kasia.png' },
+    { id: 'wujek-bartek', name: 'Wujek Bartek', role: 'Uncle', color: '#008000', emoji: '👨‍🦱', type: 'npc', image: 'assets/characters/wujek-bartek.png' },
+    { id: 'zio-diego', name: 'Zio Diego', role: 'Uncle', color: '#1560BD', emoji: '👨‍🦳', type: 'npc', image: 'assets/characters/zio-diego.png' },
+    { id: 'nonna-patrizia', name: 'Nonna Patrizia', role: 'Grandma', color: '#FF00FF', emoji: '👵', type: 'npc', image: 'assets/characters/babcia-urszula.png' },
+    { id: 'nonno-mauro', name: 'Nonno Mauro', role: 'Grandpa', color: '#87CEEB', emoji: '👴', type: 'npc', image: 'assets/characters/nonno-mauro.png' },
+    { id: 'dziadek-tosiek', name: 'Dziadek Tosiek', role: 'Grandpa', color: '#800020', emoji: '👴', type: 'npc', image: 'assets/characters/dziadek-tosiek.png' },
+    { id: 'babcia-urszula', name: 'Babcia Urszula', role: 'Grandma', color: '#50C878', emoji: '👵', type: 'npc', image: 'assets/characters/babcia-urszula.png' },
+    { id: 'pani-ania', name: 'Pani Ania', role: 'Oli\'s Teacher', color: '#000000', emoji: '👩‍🏫', type: 'npc', image: 'assets/characters/pani-ania.png' },
+    { id: 'pani-isza', name: 'Pani Isza', role: 'Vicky\'s Teacher', color: '#F4A460', emoji: '👩‍🏫', type: 'npc', image: 'assets/characters/pani-isza.png' },
+    { id: 'bisnonna-mirella', name: 'Bisnonna Mirella', role: 'Great Grandma', color: '#DDA0DD', emoji: '👵', type: 'npc', image: 'assets/characters/bisnonna-mirella.png' },
+    { id: 'prababcia-stasia', name: 'Prababcia Stasia', role: 'Great Great Grandma', color: '#F0E68C', emoji: '👵', type: 'npc', image: 'assets/characters/prababcia-stasia.png' },
+    { id: 'antos', name: 'Antos', role: 'Local Shopkeeper', color: '#8B4513', emoji: '👨', type: 'npc', image: 'assets/characters/antos.png' },
+    { id: 'julek', name: 'Julek', role: 'Park Ranger', color: '#228B22', emoji: '👨', type: 'npc', image: 'assets/characters/julek.png' }
 ];
 
 // Game Board Configuration
@@ -183,7 +192,10 @@ function renderCharacterSelection() {
     const grid = document.getElementById('characters-grid');
     grid.innerHTML = '';
     
-    CHARACTERS.forEach(character => {
+    // Only show playable characters for selection
+    const playableCharacters = CHARACTERS.filter(char => char.type === 'playable');
+    
+    playableCharacters.forEach(character => {
         const card = document.createElement('div');
         card.className = 'character-card';
         card.onclick = () => toggleCharacterSelection(character);
@@ -194,8 +206,12 @@ function renderCharacterSelection() {
         }
         
         card.innerHTML = `
-            <div class="character-avatar" style="background-color: ${character.color}">
-                ${character.emoji}
+            <div class="character-avatar">
+                <img src="${character.image}" alt="${character.name}" class="character-image" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="character-emoji-fallback" style="display: none; background-color: ${character.color};">
+                    ${character.emoji}
+                </div>
             </div>
             <div class="character-name">${character.name}</div>
             <div class="character-role">${character.role}</div>
@@ -347,8 +363,16 @@ function createBoardSpace(space, index) {
         if (player) {
             const token = document.createElement('div');
             token.className = 'player-token';
-            token.style.backgroundColor = player.color;
-            token.textContent = player.token;
+            
+            // Try to use character image, fallback to colored token
+            const character = CHARACTERS.find(c => c.id === player.id);
+            if (character && character.image) {
+                token.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
+            } else {
+                token.style.backgroundColor = player.color;
+                token.textContent = player.token;
+            }
+            
             spaceElement.appendChild(token);
         }
     });
