@@ -231,15 +231,16 @@ body {
 
 .game-header {
     background: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 15px;
+    padding: 8px 12px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    gap: 20px;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+    gap: 15px;
     flex-wrap: wrap;
+    min-height: auto;
 }
 
 .player-info {
@@ -251,26 +252,29 @@ body {
 .current-player {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: rgba(255, 255, 255, 0.95);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 6px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 45px;
 }
 
 .current-player-avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: white;
     font-weight: bold;
     border: 2px solid #e0e0e0;
     overflow: hidden;
     flex-shrink: 0;
+    min-width: 30px;
+    min-height: 30px;
 }
 
 .current-player-image {
@@ -343,13 +347,14 @@ body {
 
 /* Game Board */
 .game-board {
-    margin-top: 20px;
+    margin-top: 10px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
+    max-height: calc(100vh - 120px);
 }
 
 .game-board::before {
