@@ -7,25 +7,25 @@ const CHARACTERS = [
     { id: 'sylwia', name: 'Sylwia', role: 'Mother', color: '#FFA500', emoji: '👩‍👧', type: 'playable', image: 'assets/characters/sylwia.png' },
     { id: 'oli', name: 'Oli', role: 'Son', color: '#FF0000', emoji: '👦', type: 'playable', image: 'assets/characters/oli.png' },
     { id: 'vicky', name: 'Vicky', role: 'Daughter', color: '#FFC0CB', emoji: '👧', type: 'playable', image: 'assets/characters/vicky.png' },
-    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable', image: 'assets/characters/leon.png' },
-    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable', image: 'assets/characters/nela.png' },
-    { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable', image: 'assets/characters/micky.png' },
-    { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable', image: 'assets/characters/jasiu.png' },
+    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable' },
+    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable' },
+    { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable' },
+    { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable' },
     
     // NPCs (Non-Playable Characters)
     { id: 'ciocia-kasia', name: 'Ciocia Kasia', role: 'Aunt', color: '#FFFF00', emoji: '👩‍🦰', type: 'npc', image: 'assets/characters/ciocia-kasia.png' },
-    { id: 'wujek-bartek', name: 'Wujek Bartek', role: 'Uncle', color: '#008000', emoji: '👨‍🦱', type: 'npc', image: 'assets/characters/wujek-bartek.png' },
-    { id: 'zio-diego', name: 'Zio Diego', role: 'Uncle', color: '#1560BD', emoji: '👨‍🦳', type: 'npc', image: 'assets/characters/zio-diego.png' },
-    { id: 'nonna-patrizia', name: 'Nonna Patrizia', role: 'Grandma', color: '#FF00FF', emoji: '👵', type: 'npc', image: 'assets/characters/babcia-urszula.png' },
-    { id: 'nonno-mauro', name: 'Nonno Mauro', role: 'Grandpa', color: '#87CEEB', emoji: '👴', type: 'npc', image: 'assets/characters/nonno-mauro.png' },
-    { id: 'dziadek-tosiek', name: 'Dziadek Tosiek', role: 'Grandpa', color: '#800020', emoji: '👴', type: 'npc', image: 'assets/characters/dziadek-tosiek.png' },
-    { id: 'babcia-urszula', name: 'Babcia Urszula', role: 'Grandma', color: '#50C878', emoji: '👵', type: 'npc', image: 'assets/characters/babcia-urszula.png' },
-    { id: 'pani-ania', name: 'Pani Ania', role: 'Oli\'s Teacher', color: '#000000', emoji: '👩‍🏫', type: 'npc', image: 'assets/characters/pani-ania.png' },
-    { id: 'pani-isza', name: 'Pani Isza', role: 'Vicky\'s Teacher', color: '#F4A460', emoji: '👩‍🏫', type: 'npc', image: 'assets/characters/pani-isza.png' },
-    { id: 'bisnonna-mirella', name: 'Bisnonna Mirella', role: 'Great Grandma', color: '#DDA0DD', emoji: '👵', type: 'npc', image: 'assets/characters/bisnonna-mirella.png' },
-    { id: 'prababcia-stasia', name: 'Prababcia Stasia', role: 'Great Great Grandma', color: '#F0E68C', emoji: '👵', type: 'npc', image: 'assets/characters/prababcia-stasia.png' },
-    { id: 'antos', name: 'Antos', role: 'Local Shopkeeper', color: '#8B4513', emoji: '👨', type: 'npc', image: 'assets/characters/antos.png' },
-    { id: 'julek', name: 'Julek', role: 'Park Ranger', color: '#228B22', emoji: '👨', type: 'npc', image: 'assets/characters/julek.png' }
+    { id: 'wujek-bartek', name: 'Wujek Bartek', role: 'Uncle', color: '#008000', emoji: '👨‍🦱', type: 'npc' },
+    { id: 'zio-diego', name: 'Zio Diego', role: 'Uncle', color: '#1560BD', emoji: '👨‍🦳', type: 'npc' },
+    { id: 'nonna-patrizia', name: 'Nonna Patrizia', role: 'Grandma', color: '#FF00FF', emoji: '👵', type: 'npc' },
+    { id: 'nonno-mauro', name: 'Nonno Mauro', role: 'Grandpa', color: '#87CEEB', emoji: '👴', type: 'npc' },
+    { id: 'dziadek-tosiek', name: 'Dziadek Tosiek', role: 'Grandpa', color: '#800020', emoji: '👴', type: 'npc' },
+    { id: 'babcia-urszula', name: 'Babcia Urszula', role: 'Grandma', color: '#50C878', emoji: '👵', type: 'npc' },
+    { id: 'pani-ania', name: 'Pani Ania', role: 'Oli\'s Teacher', color: '#000000', emoji: '👩‍🏫', type: 'npc' },
+    { id: 'pani-isza', name: 'Pani Isza', role: 'Vicky\'s Teacher', color: '#F4A460', emoji: '👩‍🏫', type: 'npc' },
+    { id: 'bisnonna-mirella', name: 'Bisnonna Mirella', role: 'Great Grandma', color: '#DDA0DD', emoji: '👵', type: 'npc' },
+    { id: 'prababcia-stasia', name: 'Prababcia Stasia', role: 'Great Great Grandma', color: '#F0E68C', emoji: '👵', type: 'npc' },
+    { id: 'antos', name: 'Antos', role: 'Local Shopkeeper', color: '#8B4513', emoji: '👨', type: 'npc' },
+    { id: 'julek', name: 'Julek', role: 'Park Ranger', color: '#228B22', emoji: '👨', type: 'npc' }
 ];
 
 // Game Board Configuration
@@ -357,18 +357,24 @@ function createBoardSpace(space, index) {
     
     spaceElement.innerHTML = content;
     
-    // Add player tokens
+    // Add player tokens - only show current player's character image
     space.players.forEach(playerId => {
         const player = gameState.players.find(p => p.id === playerId);
         if (player) {
             const token = document.createElement('div');
             token.className = 'player-token';
             
-            // Try to use character image, fallback to colored token
-            const character = CHARACTERS.find(c => c.id === player.id);
-            if (character && character.image) {
-                token.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
+            // Only show character image for current player, others get colored tokens
+            if (playerId === gameState.players[gameState.currentPlayerIndex].id) {
+                const character = CHARACTERS.find(c => c.id === player.id);
+                if (character && character.image) {
+                    token.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
+                } else {
+                    token.style.backgroundColor = player.color;
+                    token.textContent = player.token;
+                }
             } else {
+                // Other players get colored tokens, not character images
                 token.style.backgroundColor = player.color;
                 token.textContent = player.token;
             }
@@ -395,21 +401,29 @@ function updateCurrentPlayerDisplay() {
     const character = CHARACTERS.find(c => c.id === currentPlayer.id);
     console.log('Found character:', character);
     
-    if (character && character.image) {
-        // Use character image
-        console.log('✅ Using character image:', character.image);
-        avatar.innerHTML = `<img src="${character.image}" alt="${currentPlayer.name}" class="current-player-image">`;
-        avatar.style.backgroundColor = 'transparent'; // Remove background color
+    if (avatar) {
+        if (character && character.image) {
+            // Use character image with proper sizing
+            console.log('✅ Using character image:', character.image);
+            avatar.innerHTML = `<img src="${character.image}" alt="${currentPlayer.name}" class="current-player-image">`;
+            avatar.style.backgroundColor = 'transparent'; // Remove background color
+        } else {
+            // Fallback to emoji and color
+            console.log('❌ Using fallback emoji and color');
+            avatar.style.backgroundColor = currentPlayer.color;
+            avatar.innerHTML = currentPlayer.emoji; // Clear any previous content
+        }
     } else {
-        // Fallback to emoji and color
-        console.log('❌ Using fallback emoji and color');
-        avatar.style.backgroundColor = currentPlayer.color;
-        avatar.textContent = currentPlayer.emoji;
-        avatar.innerHTML = currentPlayer.emoji; // Clear any previous content
+        console.error('❌ Current player avatar element not found');
     }
     
-    name.textContent = currentPlayer.name;
-    money.textContent = `$${currentPlayer.money}`;
+    if (name) {
+        name.textContent = currentPlayer.name;
+    }
+    
+    if (money) {
+        money.textContent = `$${currentPlayer.money}`;
+    }
 }
 
 function rollDice() {
@@ -704,6 +718,7 @@ function endTurn() {
     }
     
     updateCurrentPlayerDisplay();
+    renderBoard(); // Re-render board to update player tokens
     addGameLog(`It's ${gameState.players[gameState.currentPlayerIndex].name}'s turn`, 'turn');
 }
 
