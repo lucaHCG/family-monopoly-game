@@ -683,22 +683,35 @@ body {
 @media (max-width: 768px) {
     .game-header {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
     }
     
     .game-content {
         flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .game-board {
+        padding: 10px;
+        margin: 0;
     }
     
     .board-grid {
-        width: 95vmin;
-        height: 95vmin;
+        width: 90vw;
+        height: 90vw;
+        max-width: 500px;
+        max-height: 500px;
+        margin: 0 auto;
     }
     
     .game-sidebar {
         width: 100%;
         min-width: auto;
+        padding: 15px;
     }
     
     .characters-grid {
@@ -708,20 +721,131 @@ body {
     .game-title {
         font-size: 2.5rem;
     }
+    
+    .board-space {
+        min-height: 40px;
+        font-size: 0.6rem;
+    }
+    
+    .space-name {
+        font-size: 0.5rem;
+        line-height: 1.1;
+    }
+    
+    .space-price {
+        font-size: 0.4rem;
+    }
 }
 
 @media (max-width: 480px) {
     .menu-content, .game-over-content {
-        padding: 20px;
+        padding: 15px;
     }
     
     .game-title {
         font-size: 2rem;
     }
     
+    .game-content {
+        padding: 0 5px;
+    }
+    
+    .game-board {
+        padding: 8px;
+    }
+    
     .board-grid {
-        width: 98vmin;
-        height: 98vmin;
+        width: 95vw;
+        height: 95vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
+    
+    .board-space {
+        min-height: 35px;
+        font-size: 0.5rem;
+        padding: 3px;
+    }
+    
+    .space-name {
+        font-size: 0.4rem;
+        line-height: 1;
+    }
+    
+    .space-price {
+        font-size: 0.3rem;
+    }
+    
+    .player-token {
+        width: 15px;
+        height: 15px;
+        font-size: 0.6rem;
+    }
+    
+    .current-player-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .game-header {
+        padding: 8px;
+        gap: 10px;
+    }
+    
+    .current-player {
+        padding: 4px 6px;
+        gap: 6px;
+    }
+    
+    .dice-btn, .end-turn-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .game-log h3 {
+        font-size: 1rem;
+    }
+    
+    .log-entries {
+        font-size: 0.8rem;
+        min-height: 150px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .board-grid {
+        width: 98vw;
+        height: 98vw;
+        max-width: 350px;
+        max-height: 350px;
+    }
+    
+    .board-space {
+        min-height: 30px;
+        font-size: 0.4rem;
+        padding: 2px;
+    }
+    
+    .space-name {
+        font-size: 0.3rem;
+    }
+    
+    .space-price {
+        font-size: 0.25rem;
+    }
+    
+    .player-token {
+        width: 12px;
+        height: 12px;
+        font-size: 0.5rem;
+    }
+    
+    .current-player-avatar {
+        width: 25px;
+        height: 25px;
+        font-size: 0.7rem;
     }
 }
 
