@@ -363,6 +363,12 @@ function createBoardSpace(space, index) {
         if (player) {
             const token = document.createElement('div');
             token.className = 'player-token';
+            token.setAttribute('data-player', player.id);
+            
+            // Add current player class for highlighting
+            if (playerId === gameState.players[gameState.currentPlayerIndex].id) {
+                token.classList.add('current-player');
+            }
             
             // Only show character image for current player, others get colored tokens
             if (playerId === gameState.players[gameState.currentPlayerIndex].id) {
@@ -470,18 +476,22 @@ function rollDice() {
             diceDisplay.textContent = `🎲 ${roll}`;
             diceDisplay.classList.remove('rolling');
             
-            movePlayer(currentPlayer, roll);
             addGameLog(`${currentPlayer.name} rolled a ${roll}`, 'dice');
             
-            // Check if player can buy property
-            const currentSpace = gameState.board[currentPlayer.position];
-            if (currentSpace.type === 'property' && !currentSpace.owner) {
-                setTimeout(() => {
+            // Start movement animation after a brief pause
+            setTimeout(() => {
+                movePlayer(currentPlayer, roll);
+            }, 300);
+            
+            // Check if player can buy property (after movement completes)
+            setTimeout(() => {
+                const currentSpace = gameState.board[currentPlayer.position];
+                if (currentSpace.type === 'property' && !currentSpace.owner) {
                     if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
                         buyProperty(currentPlayer, currentSpace);
                     }
-                }, 500);
-            }
+                }
+            }, (roll * 200) + 1000); // Wait for movement animation to complete
         }, 500);
     } else {
         console.error('❌ Dice display element not found');
@@ -509,18 +519,55 @@ function movePlayer(player, spaces) {
         }
     }
     
-    player.position = newPosition;
+    // Animate movement step by step
+    animatePlayerMovement(player, player.position, newPosition, spaces);
+}
+
+function animatePlayerMovement(player, startPosition, endPosition, totalSpaces) {
+    let currentStep = 0;
+    const stepDelay = 200; // 200ms between each step
     
-    // Add player to new position
-    const newSpace = gameState.board[newPosition];
-    newSpace.players.push(player.id);
+    function moveStep() {
+        if (currentStep < totalSpaces) {
+            // Move one space at a time
+            const nextPosition = (startPosition + currentStep + 1) % gameState.board.length;
+            
+            // Remove from current position
+            const currentSpace = gameState.board[player.position];
+            const playerIndex = currentSpace.players.indexOf(player.id);
+            if (playerIndex !== -1) {
+                currentSpace.players.splice(playerIndex, 1);
+            }
+            
+            // Add to next position
+            player.position = nextPosition;
+            const nextSpace = gameState.board[nextPosition];
+            nextSpace.players.push(player.id);
+            
+            // Re-render board with animation
+            renderBoard();
+            
+            // Add moving class to current player's token
+            setTimeout(() => {
+                const currentPlayerToken = document.querySelector(`.player-token[data-player="${player.id}"]`);
+                if (currentPlayerToken) {
+                    currentPlayerToken.classList.add('moving');
+                    setTimeout(() => {
+                        currentPlayerToken.classList.remove('moving');
+                    }, 500);
+                }
+            }, 50);
+            
+            currentStep++;
+            setTimeout(moveStep, stepDelay);
+        } else {
+            // Movement complete
+            handleSpecialSpace(player, gameState.board[player.position]);
+            updateCurrentPlayerDisplay();
+        }
+    }
     
-    // Handle special spaces
-    handleSpecialSpace(player, newSpace);
-    
-    // Re-render board
-    renderBoard();
-    updateCurrentPlayerDisplay();
+    moveStep();
 }
 
 function handleSpecialSpace(player, space) {
@@ -718,7 +765,7 @@ function endTurn() {
     }
     
     updateCurrentPlayerDisplay();
-    renderBoard(); // Re-render board to update player tokens
+    renderBoard(); // Re-render board to update player tokens and current player highlighting
     addGameLog(`It's ${gameState.players[gameState.currentPlayerIndex].name}'s turn`, 'turn');
 }
 
