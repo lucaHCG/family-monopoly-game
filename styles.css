@@ -803,10 +803,10 @@ body {
     }
     
     .board-grid {
-        width: 85vw;
-        height: 85vw;
-        max-width: 400px;
-        max-height: 400px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 350px;
+        max-height: 350px;
         margin: 0 auto;
     }
     
@@ -825,18 +825,18 @@ body {
     }
     
     .board-space {
-        min-height: 35px;
-        font-size: 0.5rem;
-        padding: 2px;
+        min-height: 30px;
+        font-size: 0.4rem;
+        padding: 1px;
     }
     
     .space-name {
-        font-size: 0.4rem;
-        line-height: 1;
+        font-size: 0.35rem;
+        line-height: 0.9;
     }
     
     .space-price {
-        font-size: 0.3rem;
+        font-size: 0.25rem;
     }
 }
 
@@ -858,25 +858,25 @@ body {
     }
     
     .board-grid {
-        width: 90vw;
-        height: 90vw;
-        max-width: 320px;
-        max-height: 320px;
+        width: 85vw;
+        height: 85vw;
+        max-width: 280px;
+        max-height: 280px;
     }
     
     .board-space {
-        min-height: 25px;
-        font-size: 0.4rem;
+        min-height: 22px;
+        font-size: 0.35rem;
         padding: 1px;
     }
     
     .space-name {
-        font-size: 0.3rem;
-        line-height: 0.9;
+        font-size: 0.25rem;
+        line-height: 0.8;
     }
     
     .space-price {
-        font-size: 0.25rem;
+        font-size: 0.2rem;
     }
     
     .player-token {
@@ -919,25 +919,25 @@ body {
 /* Extra small screens */
 @media (max-width: 360px) {
     .board-grid {
-        width: 85vw;
-        height: 85vw;
-        max-width: 280px;
-        max-height: 280px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 240px;
+        max-height: 240px;
     }
     
     .board-space {
-        min-height: 20px;
-        font-size: 0.3rem;
+        min-height: 18px;
+        font-size: 0.25rem;
         padding: 1px;
     }
     
     .space-name {
-        font-size: 0.25rem;
-        line-height: 0.8;
+        font-size: 0.2rem;
+        line-height: 0.7;
     }
     
     .space-price {
-        font-size: 0.2rem;
+        font-size: 0.15rem;
     }
     
     .player-token {
