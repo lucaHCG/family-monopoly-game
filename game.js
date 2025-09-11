@@ -28,53 +28,83 @@ const CHARACTERS = [
     { id: 'julek', name: 'Julek', role: 'Park Ranger', color: '#228B22', emoji: '👨', type: 'npc' }
 ];
 
-// Game Board Configuration
+// Board Color Areas Configuration
+const BOARD_AREAS = {
+    cyclamen: { color: '#E91E63', name: 'Cyclamen Area' },
+    lightBlue: { color: '#03A9F4', name: 'Light Blue Area' },
+    orange: { color: '#FF9800', name: 'Orange Area' },
+    brown: { color: '#8D6E63', name: 'Brown Area' },
+    yellow: { color: '#FFEB3B', name: 'Yellow Area' },
+    red: { color: '#F44336', name: 'Red Area' },
+    green: { color: '#4CAF50', name: 'Green Area' },
+    purple: { color: '#9C27B0', name: 'Purple Area' }
+};
+
+// Special Locations
+const SPECIAL_LOCATIONS = {
+    acquapark: { name: 'Acquapark Krakow', icon: '⭐', type: 'special' },
+    legendia: { name: 'Legendia Katowice', icon: '⭐', type: 'special' },
+    rabkoland: { name: 'Rabkoland', icon: '⭐', type: 'special' },
+    energylandia: { name: 'Energylandia', icon: '⭐', type: 'special' }
+};
+
+// Game Board Configuration - 40 spaces total (9 per side + 4 corners)
 const BOARD_SPACES = [
+    // GO Corner
     { position: 0, name: 'GO', type: 'go', color: '#27ae60' },
-    { position: 1, name: 'Luca\'s House', type: 'property', color: '#000080', price: 60, rent: 2 },
+    
+    // Side 1 (right after start) - 9 spaces
+    { position: 1, name: 'Plac Zabaw Kryspinow', type: 'property', area: 'cyclamen', price: 60, rent: 4 },
     { position: 2, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 3, name: 'Sylwia\'s Garden', type: 'property', color: '#FFA500', price: 60, rent: 4 },
-    { position: 4, name: 'Tax', type: 'tax', color: '#e74c3c', amount: 200 },
-    { position: 5, name: 'Oli\'s Room', type: 'property', color: '#FF0000', price: 200, rent: 16 },
-    { position: 6, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 7, name: 'Vicky\'s Room', type: 'property', color: '#FFC0CB', price: 100, rent: 6 },
-    { position: 8, name: 'Ciocia Kasia\'s Kitchen', type: 'property', color: '#FFFF00', price: 100, rent: 6 },
-    { position: 9, name: 'Jail', type: 'jail', color: '#8e44ad' },
-    { position: 10, name: 'Wujek Bartek\'s Workshop', type: 'property', color: '#008000', price: 120, rent: 8 },
-    { position: 11, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 12, name: 'Zio Diego\'s Office', type: 'property', color: '#1560BD', price: 140, rent: 10 },
-    { position: 13, name: 'Nonna Patrizia\'s Garden', type: 'property', color: '#FF00FF', price: 140, rent: 10 },
-    { position: 14, name: 'Nonno Mauro\'s Garage', type: 'property', color: '#87CEEB', price: 160, rent: 12 },
-    { position: 15, name: 'Free Parking', type: 'free-parking', color: '#3498db' },
-    { position: 16, name: 'Dziadek Tosiek\'s Library', type: 'property', color: '#800020', price: 180, rent: 14 },
+    { position: 3, name: 'Lotnik Kryspinow', type: 'property', area: 'cyclamen', price: 60, rent: 4 },
+    { position: 4, name: 'Game Card', type: 'game-card', color: '#9c27b0' },
+    { position: 5, name: 'Acquapark Krakow', type: 'special', icon: '⭐', color: '#ff6b35' },
+    { position: 6, name: 'Antoś & Julek Home', type: 'property', area: 'lightBlue', price: 100, rent: 6 },
+    { position: 7, name: 'Chance', type: 'chance', color: '#f39c12' },
+    { position: 8, name: 'Oli & Vicky Home', type: 'property', area: 'lightBlue', price: 100, rent: 6 },
+    { position: 9, name: 'Micky & Jerzek Home', type: 'property', area: 'lightBlue', price: 120, rent: 8 },
+    
+    // Free Passage Corner
+    { position: 10, name: 'Free Passage', type: 'free-parking', color: '#3498db' },
+    
+    // Side 2 (after free passage) - 9 spaces
+    { position: 11, name: 'Mròwka', type: 'property', area: 'orange', price: 140, rent: 10 },
+    { position: 12, name: 'Chance', type: 'chance', color: '#f39c12' },
+    { position: 13, name: 'Shape Siłownia & Fitness', type: 'property', area: 'orange', price: 140, rent: 10 },
+    { position: 14, name: 'Mr Stone', type: 'property', area: 'orange', price: 160, rent: 12 },
+    { position: 15, name: 'Legendia Katowice', type: 'special', icon: '⭐', color: '#ff6b35' },
+    { position: 16, name: 'Poziomki Vis Plantis', type: 'property', area: 'brown', price: 180, rent: 14 },
     { position: 17, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 18, name: 'Babcia Urszula\'s Kitchen', type: 'property', color: '#50C878', price: 180, rent: 14 },
-    { position: 19, name: 'Leon\'s Playground', type: 'property', color: '#808080', price: 200, rent: 16 },
-    { position: 20, name: 'Nela\'s Art Room', type: 'property', color: '#DC143C', price: 220, rent: 18 },
-    { position: 21, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 22, name: 'Pani Ania\'s Classroom', type: 'property', color: '#000000', price: 220, rent: 18 },
-    { position: 23, name: 'Pani Isza\'s Classroom', type: 'property', color: '#F4A460', price: 240, rent: 20 },
-    { position: 24, name: 'Go to Jail', type: 'go-to-jail', color: '#8e44ad' },
-    { position: 25, name: 'Luca\'s Office', type: 'property', color: '#000080', price: 260, rent: 22 },
-    { position: 26, name: 'Sylwia\'s Studio', type: 'property', color: '#FFA500', price: 260, rent: 22 },
+    { position: 18, name: 'Sup Area', type: 'property', area: 'brown', price: 180, rent: 14 },
+    { position: 19, name: 'Main Plaża Kryspinow', type: 'property', area: 'brown', price: 200, rent: 16 },
+    
+    // Jail Corner
+    { position: 20, name: 'Jail', type: 'jail', color: '#8e44ad' },
+    
+    // Side 3 (after jail) - 9 spaces
+    { position: 21, name: 'Gawra', type: 'property', area: 'yellow', price: 220, rent: 18 },
+    { position: 22, name: 'Chance', type: 'chance', color: '#f39c12' },
+    { position: 23, name: 'MyDreamSky', type: 'property', area: 'yellow', price: 220, rent: 18 },
+    { position: 24, name: 'GoJump!', type: 'property', area: 'yellow', price: 240, rent: 20 },
+    { position: 25, name: 'Rabkoland', type: 'special', icon: '⭐', color: '#ff6b35' },
+    { position: 26, name: 'Mała Akademia', type: 'property', area: 'red', price: 260, rent: 22 },
     { position: 27, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 28, name: 'Oli\'s Playroom', type: 'property', color: '#FF0000', price: 280, rent: 24 },
-    { position: 29, name: 'Vicky\'s Study', type: 'property', color: '#FFC0CB', price: 300, rent: 26 },
-    { position: 30, name: 'Ciocia Kasia\'s Living Room', type: 'property', color: '#FFFF00', price: 300, rent: 26 },
-    { position: 31, name: 'Wujek Bartek\'s Shed', type: 'property', color: '#008000', price: 320, rent: 28 },
-    { position: 32, name: 'Free Parking', type: 'free-parking', color: '#3498db' },
-    { position: 33, name: 'Zio Diego\'s Study', type: 'property', color: '#1560BD', price: 350, rent: 35 },
-    { position: 34, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 35, name: 'Nonna Patrizia\'s Living Room', type: 'property', color: '#FF00FF', price: 350, rent: 35 },
-    { position: 36, name: 'Tax', type: 'tax', color: '#e74c3c', amount: 100 },
-    { position: 37, name: 'Nonno Mauro\'s Study', type: 'property', color: '#87CEEB', price: 400, rent: 50 },
-    { position: 38, name: 'Dziadek Tosiek\'s Workshop', type: 'property', color: '#800020', price: 450, rent: 55 },
-    { position: 39, name: 'Babcia Urszula\'s Living Room', type: 'property', color: '#50C878', price: 500, rent: 60 },
-    { position: 40, name: 'Leon\'s Bedroom', type: 'property', color: '#808080', price: 500, rent: 60 },
-    { position: 41, name: 'Nela\'s Bedroom', type: 'property', color: '#DC143C', price: 550, rent: 65 },
-    { position: 42, name: 'Chance', type: 'chance', color: '#f39c12' },
-    { position: 43, name: 'Pani Ania\'s Office', type: 'property', color: '#000000', price: 600, rent: 70 },
-    { position: 44, name: 'Pani Isza\'s Office', type: 'property', color: '#F4A460', price: 650, rent: 75 }
+    { position: 28, name: 'Swimming Pool Piekary', type: 'property', area: 'red', price: 260, rent: 22 },
+    { position: 29, name: 'Sport Center Piekary', type: 'property', area: 'red', price: 280, rent: 24 },
+    
+    // Free Parking Corner
+    { position: 30, name: 'Free Parking', type: 'free-parking', color: '#3498db' },
+    
+    // Side 4 (after free parking) - 9 spaces
+    { position: 31, name: 'Park Dębnicki', type: 'property', area: 'green', price: 300, rent: 26 },
+    { position: 32, name: 'Chance', type: 'chance', color: '#f39c12' },
+    { position: 33, name: 'Park Jordana', type: 'property', area: 'green', price: 300, rent: 26 },
+    { position: 34, name: 'Park Decjusza', type: 'property', area: 'green', price: 320, rent: 28 },
+    { position: 35, name: 'Energylandia', type: 'special', icon: '⭐', color: '#ff6b35' },
+    { position: 36, name: 'Hotel Forum', type: 'property', area: 'purple', price: 350, rent: 35 },
+    { position: 37, name: 'Chance', type: 'chance', color: '#f39c12' },
+    { position: 38, name: 'Krakow Baloon', type: 'property', area: 'purple', price: 350, rent: 35 },
+    { position: 39, name: 'Krakow\'s Eye', type: 'property', area: 'purple', price: 400, rent: 50 }
 ];
 
 // Chance Cards
@@ -309,9 +339,9 @@ function renderBoard() {
     const boardGrid = document.getElementById('board-grid');
     boardGrid.innerHTML = '';
     
-    // Create 11x11 grid layout
-    for (let row = 0; row < 11; row++) {
-        for (let col = 0; col < 11; col++) {
+    // Create 10x10 grid layout
+    for (let row = 0; row < 10; row++) {
+        for (let col = 0; col < 10; col++) {
             const spaceIndex = getSpaceIndex(row, col);
             if (spaceIndex !== -1) {
                 const space = gameState.board[spaceIndex];
@@ -329,20 +359,34 @@ function renderBoard() {
 
 function getSpaceIndex(row, col) {
     // Convert grid position to board space index
-    // This creates a path around the grid
-    if (row === 0) return col; // Top row
-    if (col === 10) return 10 + row; // Right column
-    if (row === 10) return 32 - col; // Bottom row
-    if (col === 0) return 44 - row; // Left column
+    // This creates a path around the grid for 40 spaces (10x10 grid)
+    if (row === 0) return col; // Top row (0-9)
+    if (col === 9) return 10 + row; // Right column (10-19)
+    if (row === 9) return 30 - col; // Bottom row (20-29)
+    if (col === 0) return 40 - row; // Left column (30-39)
     return -1; // Empty space
 }
 
 function createBoardSpace(space, index) {
     const spaceElement = document.createElement('div');
     spaceElement.className = `board-space ${space.type}`;
-    spaceElement.style.borderColor = space.color;
+    
+    // Set color based on area or direct color
+    if (space.area && BOARD_AREAS[space.area]) {
+        spaceElement.style.borderColor = BOARD_AREAS[space.area].color;
+        spaceElement.style.backgroundColor = BOARD_AREAS[space.area].color + '20'; // 20% opacity
+        spaceElement.classList.add(`area-${space.area}`);
+    } else if (space.color) {
+        spaceElement.style.borderColor = space.color;
+        spaceElement.style.backgroundColor = space.color + '20'; // 20% opacity
+    }
     
     let content = `<div class="space-name">${space.name}</div>`;
+    
+    // Add special icon for special locations
+    if (space.type === 'special' && space.icon) {
+        content += `<div class="special-icon">${space.icon}</div>`;
+    }
     
     if (space.type === 'property') {
         content += `<div class="space-price">$${space.price}</div>`;
@@ -353,6 +397,11 @@ function createBoardSpace(space, index) {
         if (space.houses > 0) {
             content += `<div style="font-size: 0.5rem; color: #27ae60;">🏠 ${space.houses}</div>`;
         }
+    }
+    
+    // Add area indicator for properties
+    if (space.type === 'property' && space.area) {
+        content += `<div class="area-indicator" style="font-size: 0.4rem; color: ${BOARD_AREAS[space.area].color}; font-weight: bold;">${BOARD_AREAS[space.area].name}</div>`;
     }
     
     spaceElement.innerHTML = content;

@@ -402,7 +402,7 @@ body {
 
 .board-grid {
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-columns: repeat(10, 1fr);
     gap: 2px;
     max-width: 800px;
     margin: 0 auto;
@@ -440,6 +440,92 @@ body {
     color: white;
     font-weight: bold;
     border: 2px solid #27ae60;
+}
+
+/* Color Area Styles */
+.area-cyclamen {
+    background: rgba(233, 30, 99, 0.2) !important;
+    border-color: #E91E63 !important;
+    color: #E91E63;
+}
+
+.area-lightBlue {
+    background: rgba(3, 169, 244, 0.2) !important;
+    border-color: #03A9F4 !important;
+    color: #03A9F4;
+}
+
+.area-orange {
+    background: rgba(255, 152, 0, 0.2) !important;
+    border-color: #FF9800 !important;
+    color: #FF9800;
+}
+
+.area-brown {
+    background: rgba(141, 110, 99, 0.2) !important;
+    border-color: #8D6E63 !important;
+    color: #8D6E63;
+}
+
+.area-yellow {
+    background: rgba(255, 235, 59, 0.2) !important;
+    border-color: #FFEB3B !important;
+    color: #FFEB3B;
+}
+
+.area-red {
+    background: rgba(244, 67, 54, 0.2) !important;
+    border-color: #F44336 !important;
+    color: #F44336;
+}
+
+.area-green {
+    background: rgba(76, 175, 80, 0.2) !important;
+    border-color: #4CAF50 !important;
+    color: #4CAF50;
+}
+
+.area-purple {
+    background: rgba(156, 39, 176, 0.2) !important;
+    border-color: #9C27B0 !important;
+    color: #9C27B0;
+}
+
+/* Special Icons */
+.special-icon {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 2px 0;
+    animation: specialPulse 2s ease-in-out infinite;
+}
+
+@keyframes specialPulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Area Indicators */
+.area-indicator {
+    font-size: 0.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Game Card Style */
+.board-space.game-card {
+    background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+    color: white;
+    font-weight: bold;
+    border: 2px solid #9c27b0;
 }
 
 .board-space.go {
