@@ -676,10 +676,16 @@ function animatePlayerMovement(player, startPosition, endPosition, totalSpaces) 
             // Re-render board with animation
             renderBoard();
             
-            // Add moving class to current player's token
+            // Add moving class to current player's token and ensure character image is shown
             setTimeout(() => {
                 const currentPlayerToken = document.querySelector(`.player-token[data-player="${player.id}"]`);
                 if (currentPlayerToken) {
+                    // Ensure the moving player shows their character image
+                    const character = CHARACTERS.find(c => c.id === player.id);
+                    if (character && character.image) {
+                        currentPlayerToken.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
+                    }
+                    
                     currentPlayerToken.classList.add('moving');
                     setTimeout(() => {
                         currentPlayerToken.classList.remove('moving');
