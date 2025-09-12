@@ -312,6 +312,11 @@ function startGame() {
     gameState.gameLog = [];
     
     // Reset board
+    if (!gameState.board || gameState.board.length === 0) {
+        console.error('❌ Board not initialized!');
+        initializeGame();
+    }
+    
     gameState.board.forEach(space => {
         space.owner = null;
         space.houses = 0;
@@ -330,13 +335,25 @@ function startGame() {
 }
 
 function renderGame() {
-    renderBoard();
-    updateCurrentPlayerDisplay();
-    renderGameLog();
+    console.log('🎨 Rendering game...');
+    try {
+        renderBoard();
+        updateCurrentPlayerDisplay();
+        renderGameLog();
+        console.log('✅ Game rendered successfully');
+    } catch (error) {
+        console.error('❌ Error rendering game:', error);
+    }
 }
 
 function renderBoard() {
+    console.log('🎯 Rendering board...');
     const boardGrid = document.getElementById('board-grid');
+    if (!boardGrid) {
+        console.error('❌ Board grid element not found!');
+        return;
+    }
+    
     boardGrid.innerHTML = '';
     
     // Create 11x11 grid layout
@@ -345,8 +362,12 @@ function renderBoard() {
             const spaceIndex = getSpaceIndex(row, col);
             if (spaceIndex !== -1) {
                 const space = gameState.board[spaceIndex];
-                const spaceElement = createBoardSpace(space, spaceIndex);
-                boardGrid.appendChild(spaceElement);
+                if (space) {
+                    const spaceElement = createBoardSpace(space, spaceIndex);
+                    boardGrid.appendChild(spaceElement);
+                } else {
+                    console.error(`❌ Space at index ${spaceIndex} not found!`);
+                }
             } else {
                 // Empty space
                 const emptySpace = document.createElement('div');
@@ -355,15 +376,16 @@ function renderBoard() {
             }
         }
     }
+    console.log('✅ Board rendered');
 }
 
 function getSpaceIndex(row, col) {
     // Convert grid position to board space index
     // This creates a path around the grid for 40 spaces (11x11 grid)
-    if (row === 0) return col; // Top row (0-10)
-    if (col === 10) return 11 + row; // Right column (11-21)
-    if (row === 10) return 32 - col; // Bottom row (22-31)
-    if (col === 0) return 42 - row; // Left column (32-39)
+    if (row === 0) return col; // Top row (0-10) -> positions 0-10
+    if (col === 10) return 11 + row; // Right column (1-10) -> positions 11-20
+    if (row === 10) return 31 - col; // Bottom row (9-0) -> positions 22-31
+    if (col === 0) return 40 - row; // Left column (9-1) -> positions 32-39
     return -1; // Empty space
 }
 
