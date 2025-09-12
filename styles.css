@@ -803,11 +803,12 @@ body {
     }
     
     .board-grid {
-        width: 60vw;
-        height: 60vw;
-        max-width: 250px;
-        max-height: 250px;
+        width: 65vw;
+        height: 65vw;
+        max-width: 280px;
+        max-height: 280px;
         margin: 0 auto;
+        gap: 1px;
     }
     
     .game-sidebar {
@@ -858,10 +859,11 @@ body {
     }
     
     .board-grid {
-        width: 55vw;
-        height: 55vw;
-        max-width: 200px;
-        max-height: 200px;
+        width: 60vw;
+        height: 60vw;
+        max-width: 220px;
+        max-height: 220px;
+        gap: 0px;
     }
     
     .board-space {
@@ -919,10 +921,11 @@ body {
 /* iPhone-sized screens */
 @media (max-width: 390px) {
     .board-grid {
-        width: 50vw;
-        height: 50vw;
-        max-width: 180px;
-        max-height: 180px;
+        width: 55vw;
+        height: 55vw;
+        max-width: 200px;
+        max-height: 200px;
+        gap: 0px;
     }
     
     .board-space {
@@ -971,10 +974,11 @@ body {
 /* Very small screens - ultra aggressive */
 @media (max-width: 320px) {
     .board-grid {
-        width: 45vw;
-        height: 45vw;
-        max-width: 160px;
-        max-height: 160px;
+        width: 50vw;
+        height: 50vw;
+        max-width: 180px;
+        max-height: 180px;
+        gap: 0px;
     }
     
     .board-space {
@@ -1023,10 +1027,11 @@ body {
 /* Extra small screens */
 @media (max-width: 360px) {
     .board-grid {
-        width: 50vw;
-        height: 50vw;
-        max-width: 180px;
-        max-height: 180px;
+        width: 55vw;
+        height: 55vw;
+        max-width: 200px;
+        max-height: 200px;
+        gap: 0px;
     }
     
     .board-space {
