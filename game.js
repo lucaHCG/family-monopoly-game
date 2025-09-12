@@ -399,10 +399,7 @@ function createBoardSpace(space, index) {
         }
     }
     
-    // Add area indicator for properties
-    if (space.type === 'property' && space.area) {
-        content += `<div class="area-indicator" style="font-size: 0.4rem; color: ${BOARD_AREAS[space.area].color}; font-weight: bold;">${BOARD_AREAS[space.area].name}</div>`;
-    }
+    // Area indicator removed to reduce clutter
     
     spaceElement.innerHTML = content;
     
