@@ -676,6 +676,67 @@ body {
     100% { transform: rotate(360deg) scale(1); }
 }
 
+/* Property Image Overlay */
+.property-image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.property-image-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.property-image-container {
+    max-width: 80vw;
+    max-height: 80vh;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.property-image-overlay.show .property-image-container {
+    transform: scale(1);
+}
+
+.property-image {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.property-image-title {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.property-image-price {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    color: #27ae60;
+    font-weight: bold;
+}
+
 .game-log {
     flex: 1;
     display: flex;

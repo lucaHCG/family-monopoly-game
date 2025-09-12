@@ -533,9 +533,13 @@ function rollDice() {
             setTimeout(() => {
                 const currentSpace = gameState.board[currentPlayer.position];
                 if (currentSpace.type === 'property' && !currentSpace.owner) {
-                    if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
-                        buyProperty(currentPlayer, currentSpace);
-                    }
+                    // Show property image animation first
+                    showPropertyImage(currentSpace, () => {
+                        // After animation, show buy confirmation
+                        if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
+                            buyProperty(currentPlayer, currentSpace);
+                        }
+                    });
                 }
             }, (roll * 200) + 1000); // Wait for movement animation to complete
         }, 500);
@@ -902,3 +906,63 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+// Property Image Animation Functions
+function showPropertyImage(property, callback) {
+    const overlay = document.getElementById('property-image-overlay');
+    const image = document.getElementById('property-image');
+    const title = document.getElementById('property-image-title');
+    const price = document.getElementById('property-image-price');
+    
+    if (!overlay || !image || !title || !price) {
+        console.error('❌ Property image overlay elements not found');
+        if (callback) callback();
+        return;
+    }
+    
+    // Set property information
+    title.textContent = property.name;
+    price.textContent = `$${property.price}`;
+    
+    // Use placeholder image for now
+    image.src = `https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=${encodeURIComponent(property.name)}`;
+    image.alt = property.name;
+    
+    // Show overlay with animation
+    overlay.classList.add('show');
+    
+    // Auto-hide after 3 seconds and call callback
+    setTimeout(() => {
+        hidePropertyImage(callback);
+    }, 3000);
+}
+
+function hidePropertyImage(callback) {
+    const overlay = document.getElementById('property-image-overlay');
+    
+    if (!overlay) {
+        console.error('❌ Property image overlay not found');
+        if (callback) callback();
+        return;
+    }
+    
+    // Hide overlay with animation
+    overlay.classList.remove('show');
+    
+    // Call callback after animation completes
+    setTimeout(() => {
+        if (callback) callback();
+    }, 300);
+}
+
+// Add click handler to close overlay when clicked
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('property-image-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                hidePropertyImage();
+            }
+        });
+    }
+});
