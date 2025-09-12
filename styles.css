@@ -803,19 +803,18 @@ body {
     }
     
     .board-grid {
-        width: 45vw;
-        height: 45vw;
-        max-width: 180px;
-        max-height: 180px;
+        width: 85vw;
+        height: 85vw;
+        max-width: 400px;
+        max-height: 400px;
         margin: 0 auto;
-        gap: 0px;
+        gap: 2px;
     }
     
     .game-sidebar {
         width: 100%;
         min-width: auto;
-        padding: 2px;
-        max-height: 80px;
+        padding: 10px;
     }
     
     .characters-grid {
@@ -827,18 +826,18 @@ body {
     }
     
     .board-space {
-        min-height: 12px;
-        font-size: 0.15rem;
-        padding: 0px;
+        min-height: 35px;
+        font-size: 0.5rem;
+        padding: 2px;
     }
     
     .space-name {
-        font-size: 0.35rem;
-        line-height: 0.9;
+        font-size: 0.4rem;
+        line-height: 1;
     }
     
     .space-price {
-        font-size: 0.25rem;
+        font-size: 0.3rem;
     }
 }
 
@@ -860,26 +859,26 @@ body {
     }
     
     .board-grid {
-        width: 40vw;
-        height: 40vw;
-        max-width: 150px;
-        max-height: 150px;
-        gap: 0px;
+        width: 90vw;
+        height: 90vw;
+        max-width: 320px;
+        max-height: 320px;
+        gap: 2px;
     }
     
     .board-space {
-        min-height: 10px;
-        font-size: 0.12rem;
-        padding: 0px;
+        min-height: 25px;
+        font-size: 0.4rem;
+        padding: 1px;
     }
     
     .space-name {
-        font-size: 0.12rem;
-        line-height: 0.7;
+        font-size: 0.3rem;
+        line-height: 0.9;
     }
     
     .space-price {
-        font-size: 0.1rem;
+        font-size: 0.25rem;
     }
     
     .player-token {
@@ -910,15 +909,12 @@ body {
     }
     
     .game-log h3 {
-        font-size: 0.6rem;
-        margin-bottom: 2px;
+        font-size: 0.9rem;
     }
     
     .log-entries {
-        font-size: 0.4rem;
-        min-height: 30px;
-        max-height: 40px;
-        overflow-y: auto;
+        font-size: 0.7rem;
+        min-height: 120px;
     }
     
     .dice-display {
@@ -933,22 +929,22 @@ body {
 /* iPhone-sized screens */
 @media (max-width: 390px) {
     .board-grid {
-        width: 35vw;
-        height: 35vw;
-        max-width: 130px;
-        max-height: 130px;
-        gap: 0px;
+        width: 85vw;
+        height: 85vw;
+        max-width: 280px;
+        max-height: 280px;
+        gap: 1px;
     }
     
     .board-space {
-        min-height: 14px;
-        font-size: 0.2rem;
+        min-height: 22px;
+        font-size: 0.35rem;
         padding: 1px;
     }
     
     .space-name {
-        font-size: 0.18rem;
-        line-height: 0.75;
+        font-size: 0.25rem;
+        line-height: 0.8;
     }
     
     .space-price {
@@ -986,11 +982,11 @@ body {
 /* Very small screens - ultra aggressive */
 @media (max-width: 320px) {
     .board-grid {
-        width: 30vw;
-        height: 30vw;
-        max-width: 110px;
-        max-height: 110px;
-        gap: 0px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 240px;
+        max-height: 240px;
+        gap: 1px;
     }
     
     .board-space {
@@ -1039,11 +1035,11 @@ body {
 /* Extra small screens */
 @media (max-width: 360px) {
     .board-grid {
-        width: 35vw;
-        height: 35vw;
-        max-width: 130px;
-        max-height: 130px;
-        gap: 0px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 240px;
+        max-height: 240px;
+        gap: 1px;
     }
     
     .board-space {
