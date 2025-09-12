@@ -476,6 +476,62 @@ function updateCurrentPlayerDisplay() {
     if (money) {
         money.textContent = `$${currentPlayer.money}`;
     }
+    
+    // Update properties summary
+    updatePropertiesSummary();
+}
+
+function updatePropertiesSummary() {
+    const propertiesList = document.getElementById('properties-list');
+    if (!propertiesList) {
+        console.error('❌ Properties list element not found');
+        return;
+    }
+    
+    // Group properties by owner
+    const propertiesByOwner = {};
+    gameState.board.forEach(space => {
+        if ((space.type === 'property' || space.type === 'special') && space.owner) {
+            if (!propertiesByOwner[space.owner]) {
+                propertiesByOwner[space.owner] = [];
+            }
+            propertiesByOwner[space.owner].push(space);
+        }
+    });
+    
+    // Create HTML for each player's properties
+    let html = '';
+    
+    if (Object.keys(propertiesByOwner).length === 0) {
+        html = '<div class="no-properties">No properties owned yet</div>';
+    } else {
+        gameState.players.forEach(player => {
+            const playerProperties = propertiesByOwner[player.id] || [];
+            const character = CHARACTERS.find(c => c.id === player.id);
+            const playerColor = character ? character.color : player.color;
+            
+            html += `<div class="player-properties" style="border-left-color: ${playerColor}">`;
+            html += `<h4>${player.name}</h4>`;
+            
+            if (playerProperties.length === 0) {
+                html += '<div class="property-item no-properties">No properties</div>';
+            } else {
+                playerProperties.forEach(property => {
+                    html += `<div class="property-item">`;
+                    html += `<span class="property-name">${property.name}</span> - `;
+                    html += `<span class="property-price">$${property.price}</span>`;
+                    if (property.houses > 0) {
+                        html += ` (${property.houses} house${property.houses > 1 ? 's' : ''})`;
+                    }
+                    html += `</div>`;
+                });
+            }
+            
+            html += `</div>`;
+        });
+    }
+    
+    propertiesList.innerHTML = html;
 }
 
 function rollDice() {
