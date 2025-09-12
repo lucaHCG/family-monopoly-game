@@ -604,7 +604,14 @@ function rollDice() {
             
             // Start movement animation after a brief pause
             setTimeout(() => {
-                movePlayer(currentPlayer, roll);
+                console.log('🎲 About to call movePlayer with:', currentPlayer, roll);
+                console.log('🎲 movePlayer function exists:', typeof movePlayer);
+                try {
+                    movePlayer(currentPlayer, roll);
+                    console.log('🎲 movePlayer call completed');
+                } catch (error) {
+                    console.error('❌ Error in movePlayer:', error);
+                }
             }, 300);
             
             // Check if player can buy property (after movement completes)
