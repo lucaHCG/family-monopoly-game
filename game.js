@@ -628,6 +628,8 @@ function rollDice() {
 }
 
 function movePlayer(player, spaces) {
+    console.log(`🎮 movePlayer called for ${player.name}, moving ${spaces} spaces`);
+    
     // Remove player from current position
     const currentSpace = gameState.board[player.position];
     const playerIndex = currentSpace.players.indexOf(player.id);
@@ -648,18 +650,30 @@ function movePlayer(player, spaces) {
         }
     }
     
+    console.log(`🎮 Starting animation from position ${player.position} to ${newPosition}`);
+    
     // Animate movement step by step
     animatePlayerMovement(player, player.position, newPosition, spaces);
 }
 
 function animatePlayerMovement(player, startPosition, endPosition, totalSpaces) {
+    console.log(`🎬 Starting movement animation for ${player.name}:`, {
+        startPosition,
+        endPosition,
+        totalSpaces,
+        playerId: player.id
+    });
+    
     let currentStep = 0;
     const stepDelay = 200; // 200ms between each step
     
     function moveStep() {
+        console.log(`🎬 Movement step ${currentStep + 1}/${totalSpaces} for ${player.name}`);
+        
         if (currentStep < totalSpaces) {
             // Move one space at a time
             const nextPosition = (startPosition + currentStep + 1) % gameState.board.length;
+            console.log(`🎬 Moving from position ${player.position} to ${nextPosition}`);
             
             // Remove from current position
             const currentSpace = gameState.board[player.position];
@@ -679,17 +693,27 @@ function animatePlayerMovement(player, startPosition, endPosition, totalSpaces) 
             // Add moving class to current player's token and ensure character image is shown
             setTimeout(() => {
                 const currentPlayerToken = document.querySelector(`.player-token[data-player="${player.id}"]`);
+                console.log(`🎬 Looking for token for player ${player.id}:`, currentPlayerToken);
+                
                 if (currentPlayerToken) {
                     // Ensure the moving player shows their character image
                     const character = CHARACTERS.find(c => c.id === player.id);
+                    console.log(`🎬 Found character for ${player.id}:`, character);
+                    
                     if (character && character.image) {
+                        console.log(`🎬 Setting character image: ${character.image}`);
                         currentPlayerToken.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
                     }
                     
                     currentPlayerToken.classList.add('moving');
+                    console.log(`🎬 Added moving class to token`);
+                    
                     setTimeout(() => {
                         currentPlayerToken.classList.remove('moving');
+                        console.log(`🎬 Removed moving class from token`);
                     }, 500);
+                } else {
+                    console.error(`❌ No token found for player ${player.id}`);
                 }
             }, 50);
             
@@ -697,6 +721,7 @@ function animatePlayerMovement(player, startPosition, endPosition, totalSpaces) 
             setTimeout(moveStep, stepDelay);
         } else {
             // Movement complete
+            console.log(`🎬 Movement complete for ${player.name}`);
             handleSpecialSpace(player, gameState.board[player.position]);
             updateCurrentPlayerDisplay();
         }
