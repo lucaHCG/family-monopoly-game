@@ -858,15 +858,15 @@ body {
     }
     
     .board-grid {
-        width: 85vw;
-        height: 85vw;
-        max-width: 280px;
-        max-height: 280px;
+        width: 80vw;
+        height: 80vw;
+        max-width: 260px;
+        max-height: 260px;
     }
     
     .board-space {
-        min-height: 22px;
-        font-size: 0.35rem;
+        min-height: 20px;
+        font-size: 0.3rem;
         padding: 1px;
     }
     
@@ -913,6 +913,110 @@ body {
     .log-entries {
         font-size: 0.7rem;
         min-height: 120px;
+    }
+}
+
+/* iPhone-sized screens */
+@media (max-width: 390px) {
+    .board-grid {
+        width: 75vw;
+        height: 75vw;
+        max-width: 240px;
+        max-height: 240px;
+    }
+    
+    .board-space {
+        min-height: 20px;
+        font-size: 0.3rem;
+        padding: 1px;
+    }
+    
+    .space-name {
+        font-size: 0.22rem;
+        line-height: 0.75;
+    }
+    
+    .space-price {
+        font-size: 0.18rem;
+    }
+    
+    .player-token {
+        width: 10px;
+        height: 10px;
+        font-size: 0.4rem;
+    }
+    
+    .current-player-avatar {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+    }
+    
+    .game-header {
+        padding: 4px;
+        gap: 6px;
+    }
+    
+    .current-player {
+        padding: 2px 4px;
+        gap: 3px;
+    }
+    
+    .dice-btn, .end-turn-btn {
+        padding: 3px 6px;
+        font-size: 0.6rem;
+    }
+}
+
+/* Very small screens - ultra aggressive */
+@media (max-width: 320px) {
+    .board-grid {
+        width: 70vw;
+        height: 70vw;
+        max-width: 200px;
+        max-height: 200px;
+    }
+    
+    .board-space {
+        min-height: 16px;
+        font-size: 0.25rem;
+        padding: 0px;
+    }
+    
+    .space-name {
+        font-size: 0.18rem;
+        line-height: 0.7;
+    }
+    
+    .space-price {
+        font-size: 0.15rem;
+    }
+    
+    .player-token {
+        width: 8px;
+        height: 8px;
+        font-size: 0.3rem;
+    }
+    
+    .current-player-avatar {
+        width: 18px;
+        height: 18px;
+        font-size: 0.5rem;
+    }
+    
+    .game-header {
+        padding: 2px;
+        gap: 4px;
+    }
+    
+    .current-player {
+        padding: 1px 3px;
+        gap: 2px;
+    }
+    
+    .dice-btn, .end-turn-btn {
+        padding: 2px 4px;
+        font-size: 0.5rem;
     }
 }
 
