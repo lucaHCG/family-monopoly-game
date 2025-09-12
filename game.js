@@ -532,13 +532,14 @@ function rollDice() {
             // Check if player can buy property (after movement completes)
             setTimeout(() => {
                 const currentSpace = gameState.board[currentPlayer.position];
-                if (currentSpace.type === 'property' && !currentSpace.owner) {
+                if ((currentSpace.type === 'property' || currentSpace.type === 'special') && !currentSpace.owner) {
                     // Show property image animation first
                     showPropertyImage(currentSpace, () => {
-                        // After animation, show buy confirmation
-                        if (confirm(`${currentPlayer.name}, would you like to buy ${currentSpace.name} for $${currentSpace.price}?`)) {
-                            buyProperty(currentPlayer, currentSpace);
-                        }
+                        // After animation, show custom buy confirmation
+                        showBuyConfirmation(currentPlayer, currentSpace, () => {
+                            // Hide the property image after choice is made
+                            hidePropertyImage();
+                        });
                     });
                 }
             }, (roll * 200) + 1000); // Wait for movement animation to complete
@@ -931,10 +932,10 @@ function showPropertyImage(property, callback) {
     // Show overlay with animation
     overlay.classList.add('show');
     
-    // Auto-hide after 3 seconds and call callback
+    // Call callback after 2 seconds (but don't hide image yet)
     setTimeout(() => {
-        hidePropertyImage(callback);
-    }, 3000);
+        if (callback) callback();
+    }, 2000);
 }
 
 function hidePropertyImage(callback) {
@@ -953,6 +954,55 @@ function hidePropertyImage(callback) {
     setTimeout(() => {
         if (callback) callback();
     }, 300);
+}
+
+// Buy Confirmation Functions
+function showBuyConfirmation(player, property, callback) {
+    const overlay = document.getElementById('buy-confirmation-overlay');
+    const title = document.getElementById('buy-confirmation-title');
+    const message = document.getElementById('buy-confirmation-message');
+    const confirmBtn = document.getElementById('buy-confirm-btn');
+    const cancelBtn = document.getElementById('buy-cancel-btn');
+    
+    if (!overlay || !title || !message || !confirmBtn || !cancelBtn) {
+        console.error('❌ Buy confirmation elements not found');
+        if (callback) callback();
+        return;
+    }
+    
+    // Set confirmation message
+    title.textContent = 'Buy Property?';
+    message.textContent = `${player.name}, would you like to buy ${property.name} for $${property.price}?`;
+    
+    // Show overlay
+    overlay.classList.add('show');
+    
+    // Set up button handlers
+    const handleConfirm = () => {
+        buyProperty(player, property);
+        hideBuyConfirmation();
+        if (callback) callback();
+    };
+    
+    const handleCancel = () => {
+        hideBuyConfirmation();
+        if (callback) callback();
+    };
+    
+    // Remove any existing listeners
+    confirmBtn.replaceWith(confirmBtn.cloneNode(true));
+    cancelBtn.replaceWith(cancelBtn.cloneNode(true));
+    
+    // Add new listeners
+    document.getElementById('buy-confirm-btn').addEventListener('click', handleConfirm);
+    document.getElementById('buy-cancel-btn').addEventListener('click', handleCancel);
+}
+
+function hideBuyConfirmation() {
+    const overlay = document.getElementById('buy-confirmation-overlay');
+    if (overlay) {
+        overlay.classList.remove('show');
+    }
 }
 
 // Add click handler to close overlay when clicked
