@@ -48,7 +48,7 @@ const SPECIAL_LOCATIONS = {
     energylandia: { name: 'Energylandia', icon: '⭐', type: 'special' }
 };
 
-// Game Board Configuration - 40 spaces total (9 per side + 4 corners)
+// Game Board Configuration - 40 spaces total (9 per side + 4 corners) for 11x11 grid
 const BOARD_SPACES = [
     // GO Corner
     { position: 0, name: 'GO', type: 'go', color: '#27ae60' },
@@ -339,9 +339,9 @@ function renderBoard() {
     const boardGrid = document.getElementById('board-grid');
     boardGrid.innerHTML = '';
     
-    // Create 10x10 grid layout
-    for (let row = 0; row < 10; row++) {
-        for (let col = 0; col < 10; col++) {
+    // Create 11x11 grid layout
+    for (let row = 0; row < 11; row++) {
+        for (let col = 0; col < 11; col++) {
             const spaceIndex = getSpaceIndex(row, col);
             if (spaceIndex !== -1) {
                 const space = gameState.board[spaceIndex];
@@ -359,11 +359,11 @@ function renderBoard() {
 
 function getSpaceIndex(row, col) {
     // Convert grid position to board space index
-    // This creates a path around the grid for 40 spaces (10x10 grid)
-    if (row === 0) return col; // Top row (0-9)
-    if (col === 9) return 10 + row; // Right column (10-19)
-    if (row === 9) return 30 - col; // Bottom row (20-29)
-    if (col === 0) return 40 - row; // Left column (30-39)
+    // This creates a path around the grid for 40 spaces (11x11 grid)
+    if (row === 0) return col; // Top row (0-10)
+    if (col === 10) return 11 + row; // Right column (11-21)
+    if (row === 10) return 32 - col; // Bottom row (22-31)
+    if (col === 0) return 42 - row; // Left column (32-39)
     return -1; // Empty space
 }
 
