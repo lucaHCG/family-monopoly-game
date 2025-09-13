@@ -7,10 +7,10 @@ const CHARACTERS = [
     { id: 'sylwia', name: 'Sylwia', role: 'Mother', color: '#FFA500', emoji: '👩‍👧', type: 'playable', image: 'assets/characters/sylwia.png' },
     { id: 'oli', name: 'Oli', role: 'Son', color: '#FF0000', emoji: '👦', type: 'playable', image: 'assets/characters/oli.png' },
     { id: 'vicky', name: 'Vicky', role: 'Daughter', color: '#FFC0CB', emoji: '👧', type: 'playable', image: 'assets/characters/vicky.png' },
-    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable' },
-    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable' },
-    { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable' },
-    { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable' },
+    { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable', image: 'assets/characters/leon.png' },
+    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable', image: 'assets/characters/nela.png' },
+    { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable', image: 'assets/characters/micky.png' },
+    { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable', image: 'assets/characters/jasiu.png' },
     
     // NPCs (Non-Playable Characters)
     { id: 'ciocia-kasia', name: 'Ciocia Kasia', role: 'Aunt', color: '#FFFF00', emoji: '👩‍🦰', type: 'npc', image: 'assets/characters/ciocia-kasia.png' },
