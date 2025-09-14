@@ -8,7 +8,7 @@ const CHARACTERS = [
     { id: 'oli', name: 'Oli', role: 'Son', color: '#FF0000', emoji: '👦', type: 'playable', image: 'assets/characters/oli.png' },
     { id: 'vicky', name: 'Vicky', role: 'Daughter', color: '#FFC0CB', emoji: '👧', type: 'playable', image: 'assets/characters/vicky.png' },
     { id: 'leon', name: 'Leon', role: 'Oli\'s Best Friend', color: '#808080', emoji: '👦', type: 'playable', image: 'assets/characters/leon.png' },
-    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable', image: 'assets/characters/nela.png' },
+    { id: 'nela', name: 'Nela', role: 'Leon\'s Sister', color: '#DC143C', emoji: '👧', type: 'playable', image: 'assets/characters/nela-small.png' },
     { id: 'micky', name: 'Micky', role: 'Family Friend', color: '#32CD32', emoji: '👦', type: 'playable', image: 'assets/characters/micky.png' },
     { id: 'jasiu', name: 'Jasiu', role: 'Neighbor', color: '#FFD700', emoji: '👦', type: 'playable', image: 'assets/characters/jasiu.png' },
     
@@ -238,7 +238,8 @@ function renderCharacterSelection() {
         card.innerHTML = `
             <div class="character-avatar">
                 <img src="${character.image}" alt="${character.name}" class="character-image" 
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                     onload="console.log('✅ Image loaded successfully:', character.name, character.image)"
+                     onerror="console.error('❌ Image failed to load:', character.name, character.image); this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="character-emoji-fallback" style="display: none; background-color: ${character.color};">
                     ${character.emoji}
                 </div>
@@ -441,9 +442,13 @@ function createBoardSpace(space, index) {
             // Show character image for ALL players
             const character = CHARACTERS.find(c => c.id === player.id);
             if (character && character.image) {
-                token.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image">`;
+                console.log('🎯 Rendering player token for:', player.name, 'with image:', character.image);
+                token.innerHTML = `<img src="${character.image}" alt="${player.name}" class="player-token-image" 
+                                     onload="console.log('✅ Player token image loaded:', player.name)"
+                                     onerror="console.error('❌ Player token image failed:', player.name, character.image)">`;
             } else {
                 // Fallback to colored token if no character image
+                console.log('⚠️ No character image found for:', player.name, 'using fallback');
                 token.style.backgroundColor = player.color;
                 token.textContent = player.token;
             }
@@ -473,12 +478,14 @@ function updateCurrentPlayerDisplay() {
     if (avatar) {
         if (character && character.image) {
             // Use character image with proper sizing
-            console.log('✅ Using character image:', character.image);
-            avatar.innerHTML = `<img src="${character.image}" alt="${currentPlayer.name}" class="current-player-image">`;
+            console.log('✅ Using character image for current player:', character.image);
+            avatar.innerHTML = `<img src="${character.image}" alt="${currentPlayer.name}" class="current-player-image" 
+                                     onload="console.log('✅ Current player image loaded:', currentPlayer.name)"
+                                     onerror="console.error('❌ Current player image failed:', currentPlayer.name, character.image)">`;
             avatar.style.backgroundColor = 'transparent'; // Remove background color
         } else {
             // Fallback to emoji and color
-            console.log('❌ Using fallback emoji and color');
+            console.log('❌ Using fallback emoji and color for current player');
             avatar.style.backgroundColor = currentPlayer.color;
             avatar.innerHTML = currentPlayer.emoji; // Clear any previous content
         }
